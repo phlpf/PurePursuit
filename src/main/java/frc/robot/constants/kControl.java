@@ -4,8 +4,6 @@
 
 package frc.robot.constants;
 
-import frc.robot.subsystems.Shooter.ShooterRPMS;
-
 /** Add your docs here. */
 public class kControl {
     // Index
@@ -16,7 +14,4 @@ public class kControl {
     // Acquisition
     public static final double ACQUISITION_RPMS = 5000;
 
-    // Shooter
-    public static final ShooterRPMS SHOOTER_LOW_RPMS = new ShooterRPMS(500, 4000);
-    public static final ShooterRPMS SHOOTER_HIGH_RPMS = new ShooterRPMS(4500, 5000);
 }

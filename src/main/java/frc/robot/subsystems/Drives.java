@@ -23,6 +23,7 @@ import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.utils.PhotonVisionWrapper;
 import frc.robot.constants.kCANIDs;
 import frc.robot.constants.kSwerve;
 
@@ -37,7 +38,7 @@ public class Drives extends SubsystemBase {
     private final SwerveModule backRightModule;
 
     private final WPI_Pigeon2 pigeonTwo = new WPI_Pigeon2(kCANIDs.DRIVETRAIN_PIGEON_ID, kSwerve.CANIVORE_NAME);
-
+    PhotonVisionWrapper cam = new PhotonVisionWrapper("Logitech_Webcam_C930e");
     private final SwerveDriveKinematics kinematics = new SwerveDriveKinematics(
                     // Front Right
                     new Translation2d(DRIVETRAIN_TRACKWIDTH_METERS / 2.0, DRIVETRAIN_WHEELBASE_METERS / 2.0),
@@ -208,5 +209,10 @@ public class Drives extends SubsystemBase {
         SmartDashboard.putNumber("A-Swrv/RR", ((TalonFX)backRightModule.getDriveMotor()).getSupplyCurrent());
 
         field.setRobotPose(getPose());
+    }
+
+    // Vision
+    public PhotonVisionWrapper getCamera(){
+        return cam;
     }
 }

@@ -9,10 +9,10 @@ public class kSwerve {
      *
      * This can be reduced to cap the robot's maximum speed. Typically, this is useful during initial testing of the robot.
      */
-    public static final GearRatio VEL_GEAR_RATIO = GearRatio.L2;
+    public static final GearRatio VEL_GEAR_RATIO = GearRatio.L3;
     public static final ModuleConfiguration VEL_GEAR_RATIO_CFG = VEL_GEAR_RATIO.getConfiguration();
     public static double MAX_VOLTAGE = 12.0;
-    public static String CANIVORE_NAME = "McQDriveBus";
+    public static String CANIVORE_NAME = "rio";
 
     /**
      * The maximum velocity of the robot in meters per second.
@@ -48,10 +48,10 @@ public class kSwerve {
     // Here we calculate the theoretical maximum angular velocity. You can also replace this with a measured amount.
     public static double MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND = 13.96;
 
-    public static final double FRONT_LEFT_MODULE_STEER_OFFSET = -Math.toRadians(271.0);
-    public static final double FRONT_RIGHT_MODULE_STEER_OFFSET = -Math.toRadians(8.0);
-    public static final double REAR_LEFT_MODULE_STEER_OFFSET = -Math.toRadians(54.0);
-    public static final double REAR_RIGHT_MODULE_STEER_OFFSET = -Math.toRadians(321.0);
+    public static final double FRONT_RIGHT_MODULE_STEER_OFFSET = -Math.toRadians(118.37);
+    public static final double FRONT_LEFT_MODULE_STEER_OFFSET = -Math.toRadians(102.99);
+    public static final double REAR_RIGHT_MODULE_STEER_OFFSET = -Math.toRadians(74.26);
+    public static final double REAR_LEFT_MODULE_STEER_OFFSET = -Math.toRadians(339.77);
 
     public static final double SWERVE_ALLOWED_OFFSET = 1.0;
 
