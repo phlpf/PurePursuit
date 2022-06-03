@@ -3,6 +3,7 @@ package frc.robot.commands.drives;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.constants.kSwerve;
 import frc.robot.subsystems.Drives;
@@ -44,27 +45,28 @@ public class DriveCommand extends CommandBase {
     @Override
     public void execute() {
         if(DriverStation.isTeleop() && drives.getRunDrives()) {
-            double rotationSpeed = rotationSupplier.getAsDouble();
+            update.run();
 
+            double rotationSpeed = rotationSupplier.getAsDouble();
+            SmartDashboard.putNumber("rotSpeed", rotationSpeed);
             // correct for angle 
             if (rotationSpeed == 0) {
                 if (lastRotationSpeed != 0) {
-                    setpointAngle = drives.getGyroscopeRotation();
+                    setpointAngle = drives.getRotation();
                 }
-                Rotation2d angleOffset = setpointAngle.minus(drives.getGyroscopeRotation());
+                Rotation2d angleOffset = setpointAngle.minus(drives.getRotation());
 
                 if (Math.abs(angleOffset.getDegrees()) > kSwerve.SWERVE_ALLOWED_OFFSET) {
                     rotationSpeed = kSwerve.SWERVE_CORRECTION_SPEED * (angleOffset.getDegrees() / Math.abs(angleOffset.getDegrees()));
                 }
             }
-            update.run();
             drives.updateModules(
                     drives.getKinematics().toSwerveModuleStates(
                             ChassisSpeeds.fromFieldRelativeSpeeds(
                                     translationXSupplier.getAsDouble(),
                                     translationYSupplier.getAsDouble(),
                                     rotationSpeed,
-                                    drives.getGyroscopeRotation()
+                                    drives.getRotation()
                             )
                     )
             );

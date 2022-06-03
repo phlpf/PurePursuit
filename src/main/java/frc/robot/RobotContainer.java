@@ -24,9 +24,9 @@ public class RobotContainer {
     private final Drives drives = new Drives();
     private final PurePursuitHelper purePursuit = new PurePursuitHelper(drives);
     private final DriveCommand pursue = new DriveCommand(drives, 
-                                                () -> purePursuit.getXSpeed(),
-                                                () ->  purePursuit.getYSpeed(), 
-                                                () -> purePursuit.getRotSpeed(),
+                                                () -> purePursuit.getXSpeed() * kSwerve.MAX_VELOCITY_METERS_PER_SECOND,
+                                                () ->  purePursuit.getYSpeed() * kSwerve.MAX_VELOCITY_METERS_PER_SECOND, 
+                                                () -> purePursuit.getRotSpeed() * kSwerve.MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND,
                                                 () -> purePursuit.isFinished(),
                                                 () -> purePursuit.update()
                                         );
@@ -61,8 +61,9 @@ public class RobotContainer {
                         .whenPressed(drives::zeroGyroscope);
         // new Button(driverController::getStartButton);
         new Button(driverController::getAButton)
-                        .whenPressed(pursue)
-                        .whenReleased(() -> pursue.cancel());
+                        .whenPressed(pursue);
+        new Button(driverController::getBButton)
+                        .whenPressed(() -> pursue.cancel());
 
 
         // POV
@@ -113,8 +114,5 @@ public class RobotContainer {
       
     }
     public void setLEDs(int pattern){
-    }
-    public void checkDrives(){
-        drives.checkStates();
     }
 }
