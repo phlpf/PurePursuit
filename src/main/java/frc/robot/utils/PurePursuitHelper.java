@@ -47,7 +47,7 @@ public class PurePursuitHelper {
     public double getRotSpeed(){
         SmartDashboard.putNumber("ballRotation", ballRotation);
         SmartDashboard.putNumber("ROTATIONSPEED", ROTATION_SPEED);
-        return -ROTATION_SPEED*(ballRotation/15);
+        return Math.max(-ROTATION_SPEED*(ballRotation/45), Math.signum(ballRotation)*0.15);
     }
     public boolean isFinished(){
         return !detectionDebounce.calculate(cam.hasTargets());
